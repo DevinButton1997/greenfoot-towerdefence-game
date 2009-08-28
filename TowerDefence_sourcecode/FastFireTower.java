@@ -27,15 +27,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class FastFireTower extends Tower
 {
-    private GreenfootImage bulletImage;
     private boolean firedOne = false;
     
     
     public FastFireTower()
     {
         super(75, 55, 7, 4.0, PRICE_FASTFIRETOWER);
-        bulletImage = new GreenfootImage(7,7);
-        bulletImage.fillOval(1, 1, 6, 6);
     }
     
     /**
@@ -44,8 +41,6 @@ public class FastFireTower extends Tower
      */
     public void act() 
     {
-        GreenfootImage im = new GreenfootImage(13, 13);
-        im.fillOval(1, 1, 12, 12);
         target = getTarget();
         
         if( lastShot < RELOAD_SPEED)
@@ -62,8 +57,8 @@ public class FastFireTower extends Tower
                 double x     = target.getX() + Math.cos(angle) * target.getSpeed();
                 double y     = target.getY() + Math.sin(angle) * target.getSpeed();
                 
-                getWorld().addObject(new Bullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, bulletImage, "hit.wav"), getX(), getY());
-                getWorld().addObject(new Bullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, bulletImage, "hit.wav"), getX(), getY());
+                getWorld().addObject(new FastFireBullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, "hit.wav"), getX(), getY());
+                getWorld().addObject(new FastFireBullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, "hit.wav"), getX(), getY());
                 
                 lastShot = 0;
                 firedOne      = false;
@@ -74,8 +69,8 @@ public class FastFireTower extends Tower
                 double angle = Math.toRadians( target.getRotation() );
                 double x = target.getX() + Math.cos(angle) * target.getSpeed();
                 double y = target.getY() + Math.sin(angle) * target.getSpeed();
-                getWorld().addObject(new Bullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, bulletImage, "hit.wav"), getX(), getY());
-                getWorld().addObject(new Bullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, bulletImage, "hit.wav"), getX(), getY());
+                getWorld().addObject(new FastFireBullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, "hit.wav"), getX(), getY());
+                getWorld().addObject(new FastFireBullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, "hit.wav"), getX(), getY());
                 
                 firedOne = true;
             }

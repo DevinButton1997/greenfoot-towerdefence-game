@@ -40,8 +40,6 @@ public class Tower extends UI
     
     protected Creep target;        // Handel in wich the current target is stored.
     
-    public GreenfootImage bulletImage; // Image for the bullet.
-    
     /**
      * Create a new Tower
      * 
@@ -57,7 +55,7 @@ public class Tower extends UI
         RELOAD_SPEED  = reloadSpeed;
         TOWER_DAMAGE  = damage;
         BULLET_SPEED  = bulletSpeed;
-        upgradeCosts  = (int) (towerCosts*1.75);
+        upgradeCosts  = (int) (towerCosts * 1.75);
         lastShot      = (int) RELOAD_SPEED;
     }
     

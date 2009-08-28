@@ -57,6 +57,7 @@ public class UI extends Actor
     protected static final int PRICE_NORMALTOWER = 25;
     protected static final int PRICE_FASTFIRETOWER = 35;
     protected static final int PRICE_ROCKETTOWER = 50;
+    protected static final int PRICE_ICETOWER = 75;
     
     protected static final int MAX_LEVEL = 50;
     

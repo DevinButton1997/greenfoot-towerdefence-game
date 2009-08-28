@@ -27,15 +27,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class NormalTower extends Tower
 {
-    private GreenfootImage bulletImage;
-    
-    
     public NormalTower()
     {
         super(50, 50, 15, 5.0, PRICE_NORMALTOWER);
-        
-        bulletImage = new GreenfootImage(13,13);
-        bulletImage.fillOval(1, 1, 12, 12);
     }
     
     /**
@@ -44,8 +38,6 @@ public class NormalTower extends Tower
      */
     public void act() 
     {
-        GreenfootImage im = new GreenfootImage(13, 13);
-        im.fillOval(1, 1, 12, 12);
         target = getTarget();
         
         if( lastShot < RELOAD_SPEED)
@@ -62,7 +54,7 @@ public class NormalTower extends Tower
                 double x     = target.getX() + Math.cos(angle) * target.getSpeed();
                 double y     = target.getY() + Math.sin(angle) * target.getSpeed();
                 
-                getWorld().addObject(new Bullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, bulletImage, "hit.wav"), getX(), getY());
+                getWorld().addObject(new NormalBullet((int) x, (int) y, (int) BULLET_SPEED, (int) TOWER_DAMAGE, "hit.wav"), getX(), getY());
                 
                 lastShot = 0;
             }

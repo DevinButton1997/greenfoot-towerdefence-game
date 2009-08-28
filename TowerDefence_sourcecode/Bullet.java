@@ -29,18 +29,16 @@ import java.util.List; // List
  */
 public class Bullet extends UI
 {
-    private double BULLETSPEED;
-    private int DAMAGE;
+    protected double BULLETSPEED;
+    protected int DAMAGE;
     
-    private Creep target;
-    private int targetX;
-    private int targetY;
-    private boolean fired = false;
-    private boolean selfAiming = false;
-    private GreenfootImage bulletImage;
-    private String sound;
+    protected Creep target;
+    protected int targetX;
+    protected int targetY;
+    protected boolean fired = false;
+    protected String sound;
     
-    private long lastCallOfAct;
+    protected long lastCallOfAct;
 
     
     /**
@@ -50,20 +48,16 @@ public class Bullet extends UI
      * @param pY             Targets y position
      * @param speed          bullet speed
      * @param damage         bullet damage
-     * @param pSelfAiming    should the  bullet follow the target?
-     * @param pBulletImage   Image for the bullet
+     * @param explosionSound bullet explosion sound
      */
-    public Bullet(int pX, int pY, double speed, int damage, GreenfootImage pBulletImage, String pExplosionSound)
+    public Bullet(int pX, int pY, double speed, int damage, String explosionSound)
     {
         targetX       = pX;
         targetY       = pY;
         BULLETSPEED   = speed;
         DAMAGE        = damage;
-        bulletImage   = pBulletImage;
-        sound         = pExplosionSound;
+        sound         = explosionSound;
         lastCallOfAct = System.currentTimeMillis();
-        
-        setImage(new GreenfootImage(1,1));
     }
     
     /**
@@ -72,20 +66,15 @@ public class Bullet extends UI
      * @param pTarget        bullet target
      * @param speed          bullet speed
      * @param damage         bullet damage
-     * @param pSelfAiming    should the  bullet follow the target?
-     * @param pBulletImage   Image for the bullet
+     * @param explosionSound bullet explosion sound
      */
-    public Bullet(Creep pTarget, double speed, int damage, boolean pSelfAiming, GreenfootImage pBulletImage, String pExplosionSound)
+    public Bullet(Creep pTarget, int speed, int damage, String explosionSound)
     {
         target        = pTarget;
         BULLETSPEED   = speed;
         DAMAGE        = damage;
-        selfAiming    = pSelfAiming;
-        bulletImage   = pBulletImage;
-        sound         = pExplosionSound;
+        sound         = explosionSound;
         lastCallOfAct = System.currentTimeMillis();
-        
-        setImage(new GreenfootImage(1,1));
     }
     
     /**
@@ -98,7 +87,7 @@ public class Bullet extends UI
         lastCallOfAct        = System.currentTimeMillis();
         
         // If the bullet is fired and not self aiming to target we don't have to correct the fire angle.
-        if( (!fired)||(selfAiming) )
+        if( !fired )
         {
             if( target != null )
             {
@@ -157,12 +146,7 @@ public class Bullet extends UI
                 turn( (int) Math.round(v1.getAngle(v1, v2)) );
             }
             
-            if( !fired )
-            {
-                setImage(bulletImage);
-            
-                fired = true;
-            }
+            fired = true;
         }
         
         if( atWorldEdge() )
@@ -174,21 +158,7 @@ public class Bullet extends UI
         {
             Creep victim = (Creep) getWorld().getObjectsAt(getX(), getY(), Creep.class).get(0);
             
-            if( selfAiming )
-            {
-                getWorld().addObject(new Explosion(), victim.getX(), victim.getY());
-                
-                List CreepsInRange = getObjectsInRange(90, Creep.class);
-                
-                for( int i = 0; i < CreepsInRange.size(); i++ )
-                {
-                    ((Creep) CreepsInRange.get(i)).decHealth(DAMAGE-(i*2));
-                }
-            }
-            else
-            {
-                victim.decHealth(DAMAGE);
-            }
+            victim.decHealth(DAMAGE);
             
             if( soundOn )
                 Greenfoot.playSound(sound);
