@@ -225,9 +225,15 @@ public class Creep extends UI
         setLocation(x, y);
     }
     
-    public void slowDownUnit(double percentToDecreaseSpeedBy, int effectTime)
+    /**
+     * Slows down the unit over a speciefed time.
+     * 
+     * @param newMovementSpeed percentage of actual movement speed, e.g actuall movementspeed 10, newMovementSpeed = 0.10 === movementspeed = 1
+     * @param effectTime       Time that the unit is slower.
+     */
+    public void slowDownUnit(double newMovementSpeed, int effectTime)
     {
         slowdownEffectTime = System.currentTimeMillis() + (effectTime * 1000);
-        MOVEMENTSPEED = NORMALMOVEMENTSPEED * percentToDecreaseSpeedBy;
+        MOVEMENTSPEED = NORMALMOVEMENTSPEED * newMovementSpeed;
     }
 }

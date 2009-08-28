@@ -43,7 +43,7 @@ public class myWorld extends World
         setBackground("mainMenuBG.png");
         
         setPaintOrder(Explosion.class, GameOverScreen.class, HealthBar.class, DamageReceived.class,
-                      Creep.class, LevelBar.class, Tower.class, Label.class, Counter.class);
+                      Creep.class, LevelBar.class, NormalTower.class, Label.class, Counter.class, Bullet.class);
         setActOrder(Label.class, Creep.class, Tower.class, Bullet.class, Spawn.class, Controls.class);
         
         addObject(map1, 266, 253);

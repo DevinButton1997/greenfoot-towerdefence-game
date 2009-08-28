@@ -27,15 +27,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class RocketTower extends Tower
 {
-    private GreenfootImage bulletImage;
     private boolean rocketFired = false;
     
     
     public RocketTower()
     {
         super(100, 500, 50, 2, PRICE_ROCKETTOWER);
-        
-        bulletImage = new GreenfootImage("bullet_small.png");
     }
     
     /**
@@ -44,8 +41,6 @@ public class RocketTower extends Tower
      */
     public void act() 
     {
-        GreenfootImage im = new GreenfootImage(13, 13);
-        im.fillOval(1, 1, 12, 12);
         target = getTarget();
         
         if( lastShot < RELOAD_SPEED )
@@ -63,7 +58,7 @@ public class RocketTower extends Tower
                 if( soundOn )
                     Greenfoot.playSound("rocket-fire.wav");
                 
-                getWorld().addObject(new Bullet(target, (int) BULLET_SPEED, (int) TOWER_DAMAGE, true, bulletImage, "rocket-explosion.wav"), getX(), getY());
+                getWorld().addObject(new RocketBullet(target, (int) BULLET_SPEED, (int) TOWER_DAMAGE, "rocket-explosion.wav"), getX(), getY());
                 
                 if( !rocketFired )
                 {
@@ -125,5 +120,5 @@ public class RocketTower extends Tower
         
         levelBar.setLevel(level);
         if(soundOn) Greenfoot.playSound("upgrade.wav");
-    }  
+    }
 }
