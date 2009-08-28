@@ -44,7 +44,7 @@ public class myWorld extends World
         
         setPaintOrder(Explosion.class, GameOverScreen.class, HealthBar.class, DamageReceived.class,
                       Creep.class, LevelBar.class, Tower.class, Label.class, Counter.class);
-        setActOrder(Creep.class, Tower.class, Bullet.class, Spawn.class, Controls.class);
+        setActOrder(Label.class, Creep.class, Tower.class, Bullet.class, Spawn.class, Controls.class);
         
         addObject(map1, 266, 253);
         addObject(map2, 555, 253);
@@ -78,6 +78,10 @@ public class myWorld extends World
                 
                 // Remove the image of the ui
                 ui.setImage(new GreenfootImage(1, 1));
+                
+                // Create FPS label
+                ui.fpsLabel = new FPSLabel();
+                addObject(ui.fpsLabel, 30, 6);
                 
                 
                 // Create menu
@@ -192,6 +196,10 @@ public class myWorld extends World
                 
                 // Remove the image of the ui
                 ui.setImage(new GreenfootImage(1, 1));
+                
+                // Create FPS label
+                ui.fpsLabel = new FPSLabel();
+                addObject(ui.fpsLabel, 17, 5);
                 
                 
                 // Create menu
