@@ -18,48 +18,31 @@
  **/
  
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.awt.Color;
 
 /**
- * Write a description of class fpsLabel here.
+ * Write a description of class FastFireBullet here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class FPSLabel  extends Actor
+public class FastFireBullet extends Bullet
 {
-    private Label fpsLabel;
-    private long lastCallOfAct;
-    private long lastLabelRefresh;
-    
-    public FPSLabel()
+    public FastFireBullet(int pX, int pY, int speed, int damage, String explosionSound)
     {
-        GreenfootImage im = new GreenfootImage(75, 25);
-        im.setColor(new Color(0, 0, 0, 150));
-        im.fill();
-        setImage(im);
+        super(pX, pY, speed, damage, explosionSound);
         
-        lastCallOfAct = System.currentTimeMillis();
+        GreenfootImage bulletImage = new GreenfootImage(7,7);
+        bulletImage.fillOval(1, 1, 6, 6);
+        
+        setImage(bulletImage);
     }
     
     /**
-     * Act - do whatever the fpsLabel wants to do. This method is called whenever
+     * Act - do whatever the NormalBullet wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        if( fpsLabel == null )
-        {
-            fpsLabel = new Label("FPS: n.a");
-            getWorld().addObject(fpsLabel, getX()*2, getY()+2);
-        }
-        
-        if( System.currentTimeMillis() >= lastLabelRefresh + 500 )
-        {
-            fpsLabel.setCaption("FPS: " + ((int) (1000 / (System.currentTimeMillis() - lastCallOfAct + 1))));
-            lastLabelRefresh = System.currentTimeMillis();
-        }
-        
-        lastCallOfAct = System.currentTimeMillis();
-    }    
+        super.act();
+    }   
 }
