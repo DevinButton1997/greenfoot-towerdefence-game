@@ -23,15 +23,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Creeps.
  * 
  * @author (Kevin Huber) 
- * @version (1.3)
+ * @version (1.4)
  */
 public class Creep extends UI
 {
-    private static final double WALKING_SPEED = 1.0;
+    private double NORMALMOVEMENTSPEED = 1.0;
+    private double MOVEMENTSPEED = NORMALMOVEMENTSPEED;
+    private long slowdownEffectTime = 0;
     
     private int GOLD_AMMOUT;
     private int HEALTH_POINTS;
     private int MAX_HEALTH_POINTS;
+    
+    private long lastCallOfAct;
     
     private WayPoint nextWayPoint;
     public int id;
@@ -50,6 +54,7 @@ public class Creep extends UI
         HEALTH_POINTS     = MAX_HEALTH_POINTS;
         GOLD_AMMOUT       = goldAmmout;
         id                = pId;
+        lastCallOfAct     = System.currentTimeMillis();
     }
     
     /**
@@ -58,6 +63,9 @@ public class Creep extends UI
      */
     public void act() 
     {
+        long actCallTimeDiff = System.currentTimeMillis() - lastCallOfAct;
+        lastCallOfAct        = System.currentTimeMillis();
+        
         if( healthBar == null )
         {
             healthBar = new HealthBar(HEALTH_POINTS, MAX_HEALTH_POINTS);
@@ -65,6 +73,9 @@ public class Creep extends UI
         }
         
         healthBar.update(getX(), getY()-38, HEALTH_POINTS);
+        
+        if( System.currentTimeMillis() >= slowdownEffectTime )
+            MOVEMENTSPEED = NORMALMOVEMENTSPEED;
         
         if( canSee(WayPoint.class) )
         {
@@ -131,7 +142,7 @@ public class Creep extends UI
             }
         }
         
-        move();
+        move(actCallTimeDiff);
     }
     
     /**
@@ -165,7 +176,7 @@ public class Creep extends UI
      */
     public double getSpeed()
     {
-        return WALKING_SPEED;
+        return MOVEMENTSPEED;
     }
     
     /**
@@ -202,13 +213,21 @@ public class Creep extends UI
     
     /**
      * Move forward in the current direction.
+     * 
+     * @param numSecsPassed This should be a time diff between the last calls of act().
      */
-    public void move()
+    public void move(long numSecsPassed)
     {
         double angle = Math.toRadians( getRotation() );
-        int x = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED);
-        int y = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED);
+        int x        = (int) Math.round((getX() + Math.cos(angle) * ((numSecsPassed / getWorld().getWidth()) + MOVEMENTSPEED)));
+        int y        = (int) Math.round((getY() + Math.sin(angle) * ((numSecsPassed / getWorld().getHeight()) + MOVEMENTSPEED)));
         
         setLocation(x, y);
+    }
+    
+    public void slowDownUnit(double percentToDecreaseSpeedBy, int effectTime)
+    {
+        slowdownEffectTime = System.currentTimeMillis() + (effectTime * 1000);
+        MOVEMENTSPEED = NORMALMOVEMENTSPEED * percentToDecreaseSpeedBy;
     }
 }

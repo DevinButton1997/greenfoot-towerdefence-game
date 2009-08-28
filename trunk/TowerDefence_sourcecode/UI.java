@@ -37,6 +37,8 @@ public class UI extends Actor
     protected static Label selectedTowerSpeedLabel;
     protected static Label selectedTowerUpgradeCostLabel;
     
+    protected static FPSLabel fpsLabel;
+    
     protected static UpgradeButton upgradeButton;
     protected static SellButton sellButton;
     protected static BuyNormalTowerButton buyNormalTowerButton;
@@ -71,7 +73,7 @@ public class UI extends Actor
     {
         aliveCreeps = 0;
         
-        gold = 1500;
+        gold = 150;
         level = 0;
         lives = 20;
     }

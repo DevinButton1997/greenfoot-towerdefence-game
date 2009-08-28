@@ -25,11 +25,11 @@ import java.util.List; // List
  * Bullet.
  * 
  * @author (Kevin Huber) 
- * @version (1.0)
+ * @version (1.1)
  */
 public class Bullet extends UI
 {
-    private double BULLET_SPEED;
+    private double BULLETSPEED;
     private int DAMAGE;
     
     private Creep target;
@@ -39,6 +39,8 @@ public class Bullet extends UI
     private boolean selfAiming = false;
     private GreenfootImage bulletImage;
     private String sound;
+    
+    private long lastCallOfAct;
 
     
     /**
@@ -53,12 +55,13 @@ public class Bullet extends UI
      */
     public Bullet(int pX, int pY, double speed, int damage, GreenfootImage pBulletImage, String pExplosionSound)
     {
-        targetX      = pX;
-        targetY      = pY;
-        BULLET_SPEED = speed;
-        DAMAGE       = damage;
-        bulletImage  = pBulletImage;
-        sound        = pExplosionSound;
+        targetX       = pX;
+        targetY       = pY;
+        BULLETSPEED   = speed;
+        DAMAGE        = damage;
+        bulletImage   = pBulletImage;
+        sound         = pExplosionSound;
+        lastCallOfAct = System.currentTimeMillis();
         
         setImage(new GreenfootImage(1,1));
     }
@@ -74,12 +77,13 @@ public class Bullet extends UI
      */
     public Bullet(Creep pTarget, double speed, int damage, boolean pSelfAiming, GreenfootImage pBulletImage, String pExplosionSound)
     {
-        target       = pTarget;
-        BULLET_SPEED = speed;
-        DAMAGE       = damage;
-        selfAiming   = pSelfAiming;
-        bulletImage  = pBulletImage;
-        sound        = pExplosionSound;
+        target        = pTarget;
+        BULLETSPEED   = speed;
+        DAMAGE        = damage;
+        selfAiming    = pSelfAiming;
+        bulletImage   = pBulletImage;
+        sound         = pExplosionSound;
+        lastCallOfAct = System.currentTimeMillis();
         
         setImage(new GreenfootImage(1,1));
     }
@@ -90,6 +94,9 @@ public class Bullet extends UI
      */
     public void act() 
     {
+        long actCallTimeDiff = System.currentTimeMillis() - lastCallOfAct;
+        lastCallOfAct        = System.currentTimeMillis();
+        
         // If the bullet is fired and not self aiming to target we don't have to correct the fire angle.
         if( (!fired)||(selfAiming) )
         {
@@ -107,11 +114,6 @@ public class Bullet extends UI
                     if( objectsInRange.size() > 0 )
                     {
                         target = (Creep) objectsInRange.get(0);
-                    }
-                    else
-                    {
-                        getWorld().removeObject(this);
-                        return;
                     }
                 }
             }
@@ -146,8 +148,14 @@ public class Bullet extends UI
             Vektor vV2 = new Vektor(x-targetX, y-targetY);
             
             // If the angle is less than 1 we have to turn left(-).
-            if((int) Math.round(vV1.getAngle(vV1, vV2)) > 1) turn(-(int) Math.round(v1.getAngle(v1, v2)));
-            else turn((int) Math.round(v1.getAngle(v1, v2)));
+            if( (int) Math.round(vV1.getAngle(vV1, vV2)) > 1 )
+            {
+                turn( -(int) Math.round(v1.getAngle(v1, v2)) );
+            }
+            else
+            {
+                turn( (int) Math.round(v1.getAngle(v1, v2)) );
+            }
             
             if( !fired )
             {
@@ -190,17 +198,17 @@ public class Bullet extends UI
             return;
         }
         
-        move();
+        move(actCallTimeDiff);
     }   
     
     /**
      * Move forward in the current direction.
      */
-    public void move()
+    public void move(long numSecsPassed)
     {
         double angle = Math.toRadians( getRotation() );
-        int x        = (int) Math.round(getX() + Math.cos(angle) * BULLET_SPEED);
-        int y        = (int) Math.round(getY() + Math.sin(angle) * BULLET_SPEED);
+        int x        = (int) Math.round((getX() + Math.cos(angle) * ((numSecsPassed / getWorld().getWidth()) + BULLETSPEED)));
+        int y        = (int) Math.round((getY() + Math.sin(angle) * ((numSecsPassed / getWorld().getHeight()) + BULLETSPEED)));
         
         setLocation(x, y);
     }
