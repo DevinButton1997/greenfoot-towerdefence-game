@@ -47,14 +47,17 @@ public class Creep extends UI
      * @param pId            Spawn id.
      * @param healthPaoints  Max. healthpoints for the creep.
      * @param goldAmmout     Ammout of gold the player gets after killing this creep.
+     * @param direction      Direction to move to.
      */
-    public Creep(int pId, int healthPoints, int goldAmmout)
+    public Creep(int pId, int healthPoints, int goldAmmout, int direction)
     {
         MAX_HEALTH_POINTS = healthPoints;
         HEALTH_POINTS     = MAX_HEALTH_POINTS;
         GOLD_AMMOUT       = goldAmmout;
         id                = pId;
         lastCallOfAct     = System.currentTimeMillis();
+        
+        turn(direction);
     }
     
     /**
