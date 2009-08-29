@@ -29,7 +29,7 @@ public class NormalTower extends Tower
 {
     public NormalTower()
     {
-        super(50, 50, 15, 5.0, PRICE_NORMALTOWER);
+        super(75, 50, 18, 5.0, PRICE_NORMALTOWER, true);
     }
     
     /**
@@ -77,7 +77,7 @@ public class NormalTower extends Tower
         {
             RELOAD_SPEED = 6.0;
             upgradeCosts = 0;
-            RADIUS       = 175;
+            RADIUS       = 200;
             RELOAD_SPEED = 45;
             TOWER_DAMAGE = 600;
             level        = 5;

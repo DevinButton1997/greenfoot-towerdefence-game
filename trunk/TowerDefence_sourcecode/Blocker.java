@@ -33,7 +33,7 @@ public class Blocker extends Actor
      */
     public Blocker(int width, int height)
     {
-        setImage(new GreenfootImage(1, 1));
+        setImage(new GreenfootImage(width, height));
         /* The following line should only be uncommented if you plan to make a new map!*/
         //setSize(width, height);
     }

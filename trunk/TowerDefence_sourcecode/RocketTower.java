@@ -32,7 +32,7 @@ public class RocketTower extends Tower
     
     public RocketTower()
     {
-        super(100, 500, 50, 2, PRICE_ROCKETTOWER);
+        super(100, 500, 50, 2, PRICE_ROCKETTOWER, true);
     }
     
     /**

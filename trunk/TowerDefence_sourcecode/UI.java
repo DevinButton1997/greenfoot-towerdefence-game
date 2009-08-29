@@ -104,11 +104,9 @@ public class UI extends Actor
     /**
      * Increases the Current Level.
      * 
-     * @param levelBounty Bounty for reaching the next level, this bounty will be added ontop of the players ammout of gold.
-     * 
      * @return false if the MAX_LEVEL is reached ( win ).
      */
-    public boolean levelUp(int levelBounty)
+    public boolean playerLevelUp()
     {
         level++;
         
@@ -121,7 +119,6 @@ public class UI extends Actor
         }
         
         levelCounter.increment();
-        increaseGold(levelBounty);
         
         return true;
     }
