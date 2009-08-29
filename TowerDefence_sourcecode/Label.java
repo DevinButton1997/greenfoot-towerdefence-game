@@ -60,4 +60,17 @@ public class Label extends Actor
         image.setColor(Color.WHITE);
         image.drawString(text, 1, 12);
     }
+    
+    /**
+     * Returns a handle to a GreenfootImage with a copy of the label text
+     */
+    protected GreenfootImage getStringAsImage(String string)
+    {
+        GreenfootImage image = new GreenfootImage((string.length() + 2) * 10, 16);
+        image.setFont(new Font("Tahoma", Font.BOLD, 12));
+        image.setColor(Color.WHITE);
+        image.drawString(string, 1, 12);
+        
+        return image;
+    }
 }

@@ -451,12 +451,12 @@ public class Controls extends UI
      */
     public void drawTowerRadius()
     {
-        GreenfootImage im = new GreenfootImage((int) (selectedTower.getRadius()*2.5), (int) (selectedTower.getRadius()*2.5));
+        GreenfootImage im = new GreenfootImage((int) (selectedTower.getRadius()*1.8), (int) (selectedTower.getRadius()*1.8));
         setImage(im);
                 
         // Fill the circle
         im.setColor(new Color (46, 46, 46, 180));
-        im.fillOval(0, 0, (int) (selectedTower.getRadius()*2.5), (int) (selectedTower.getRadius()*2.5));
+        im.fillOval(0, 0, (int) (selectedTower.getRadius()*1.8), (int) (selectedTower.getRadius()*1.8));
                 
         setLocation(selectedTower.getX(), selectedTower.getY());
         setImage(im);

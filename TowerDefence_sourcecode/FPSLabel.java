@@ -21,12 +21,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
 
 /**
- * Write a description of class fpsLabel here.
+ * Write a description of class FPSLabel2 here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Kevin Huber) 
+ * @version (1.1)
  */
-public class FPSLabel  extends Actor
+public class FPSLabel extends Label
 {
     private Label fpsLabel;
     private long lastCallOfAct;
@@ -34,6 +34,8 @@ public class FPSLabel  extends Actor
     
     public FPSLabel()
     {
+        super("FPS: n.a");
+        
         GreenfootImage im = new GreenfootImage(75, 25);
         im.setColor(new Color(0, 0, 0, 150));
         im.fill();
@@ -43,23 +45,28 @@ public class FPSLabel  extends Actor
     }
     
     /**
-     * Act - do whatever the fpsLabel wants to do. This method is called whenever
+     * Act - do whatever the FPSLabel2 wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        if( fpsLabel == null )
-        {
-            fpsLabel = new Label("FPS: n.a");
-            getWorld().addObject(fpsLabel, getX()*2, getY()+2);
-        }
-        
         if( System.currentTimeMillis() >= lastLabelRefresh + 500 )
         {
-            fpsLabel.setCaption("FPS: " + ((int) (1000 / (System.currentTimeMillis() - lastCallOfAct + 1))));
+            updateImage();
             lastLabelRefresh = System.currentTimeMillis();
         }
         
         lastCallOfAct = System.currentTimeMillis();
-    }    
+    }   
+    
+    private void updateImage()
+    {
+        GreenfootImage im = new GreenfootImage(80, 25);
+        im.setColor(new Color(0, 0, 0, 150));
+        im.fill();
+        
+        im.drawImage( getStringAsImage("FPS: " + ((int) (1000 / (System.currentTimeMillis() - lastCallOfAct + 1)))), 22, 8);
+        
+        setImage(im);
+    } 
 }

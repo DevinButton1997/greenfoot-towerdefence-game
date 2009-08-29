@@ -32,11 +32,13 @@ public class Spawn extends UI
     private final int actsBetweenSpawns = 100; // Calls of act() between spawns.
     private final int actsBetweenWaves = 500;  // Calls of act() between each wave.
     
+    private int spawnedCreepMoveDirection;
+    
     private int lastSpawn;
     private int lastWave;
     private boolean roundEnded;
     
-    public Spawn()
+    public Spawn(int creepSpawnDirection)
     {
         setImage(new GreenfootImage(1, 1));
         
@@ -48,6 +50,8 @@ public class Spawn extends UI
         lastSpawn     = actsBetweenSpawns;
         lastWave      = 0;
         roundEnded    = true;
+        
+        spawnedCreepMoveDirection = creepSpawnDirection;
     }
     
     /**
@@ -87,7 +91,7 @@ public class Spawn extends UI
             {
                 spawnedCreeps = MAX_CREEPS;
                 // Spawn boss
-                getWorld().addObject(new Creep(0, (int) healthPoints*5, (int) goldAmmout*6), getX(), getY());
+                getWorld().addObject(new Creep(0, (int) healthPoints*5, (int) goldAmmout*6, spawnedCreepMoveDirection), getX(), getY());
                 // increase bounty for killing creeps on 30%
                 goldAmmout += goldAmmout*0.30;
                 
@@ -107,7 +111,7 @@ public class Spawn extends UI
         {
             if( spawnedCreeps < MAX_CREEPS )
             {
-                getWorld().addObject(new Creep(spawnedCreeps, (int) healthPoints, (int) goldAmmout), getX(), getY());
+                getWorld().addObject(new Creep(spawnedCreeps, (int) healthPoints, (int) goldAmmout, spawnedCreepMoveDirection), getX(), getY());
                 
                 spawnedCreeps++;
                 lastSpawn = 0;

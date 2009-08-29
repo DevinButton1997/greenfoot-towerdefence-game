@@ -64,5 +64,9 @@ public class MenuControl extends Actor
         {
             ((myWorld) getWorld()).setLevel(2);
         }
+        else if( Greenfoot.mouseClicked(((myWorld) getWorld()).map3) )
+        {
+            ((myWorld) getWorld()).setLevel(3);
+        }
     }    
 }
