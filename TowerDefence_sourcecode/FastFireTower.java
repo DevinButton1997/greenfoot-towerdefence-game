@@ -32,7 +32,7 @@ public class FastFireTower extends Tower
     
     public FastFireTower()
     {
-        super(75, 55, 7, 4.0, PRICE_FASTFIRETOWER, true);
+        super(75, 55, 7, 8.0, PRICE_FASTFIRETOWER, true);
     }
     
     /**
@@ -91,7 +91,7 @@ public class FastFireTower extends Tower
         }
         else if(level >= 5)
         {
-            BULLET_SPEED  = 6.0;
+            BULLET_SPEED  = 9.0;
             upgradeCosts  = 0;
             RADIUS        = 110;
             RELOAD_SPEED  = 20;
