@@ -69,34 +69,41 @@ public class RocketBullet extends Bullet
         Vektor v2;
         
         // Calculate shot coordinates
-        if( target != null )
+        try
         {
-            angle = Math.toRadians( target.getRotation() );
-            v2    = new Vektor(getX()-(target.getX() + Math.cos(angle) * target.getSpeed()), getY()-(target.getY() + Math.sin(angle) * target.getSpeed()));
+            if( target != null )
+            {
+                angle = Math.toRadians( target.getRotation() );
+                v2    = new Vektor(getX()-(target.getX() + Math.cos(angle) * target.getSpeed()), getY()-(target.getY() + Math.sin(angle) * target.getSpeed()));
+            }
+            else 
+            {
+                v2 = new Vektor(getX()-targetX, getY()-targetY);
+            }
+            
+            
+            // Let the creep do another step in mind, to look if we have to turn our tower left(-) or right(+).
+            double Vangle = Math.toRadians( getRotation()+(int) Math.round(v1.getAngle(v1, v2)) );
+            double vX     = x + Math.cos(Vangle);
+            double vY     = y + Math.sin(Vangle);
+            
+            
+            Vektor vV1 = new Vektor(x-vX, y-vY);
+            Vektor vV2 = new Vektor(x-targetX, y-targetY);
+            
+            // If the angle is less than 1 we have to turn left(-).
+            if( (int) Math.round(vV1.getAngle(vV1, vV2)) > 1 )
+            {
+                turn( -(int) Math.round(v1.getAngle(v1, v2)) );
+            }
+            else
+            {
+                turn( (int) Math.round(v1.getAngle(v1, v2)) );
+            }
         }
-        else 
+        catch(IllegalStateException e)
         {
-            v2 = new Vektor(getX()-targetX, getY()-targetY);
-        }
-        
-        
-        // Let the creep do another step in mind, to look if we have to turn our tower left(-) or right(+).
-        double Vangle = Math.toRadians( getRotation()+(int) Math.round(v1.getAngle(v1, v2)) );
-        double vX     = x + Math.cos(Vangle);
-        double vY     = y + Math.sin(Vangle);
-       
-        
-        Vektor vV1 = new Vektor(x-vX, y-vY);
-        Vektor vV2 = new Vektor(x-targetX, y-targetY);
-        
-        // If the angle is less than 1 we have to turn left(-).
-        if( (int) Math.round(vV1.getAngle(vV1, vV2)) > 1 )
-        {
-            turn( -(int) Math.round(v1.getAngle(v1, v2)) );
-        }
-        else
-        {
-            turn( (int) Math.round(v1.getAngle(v1, v2)) );
+            // The target is not in the world anymore...
         }
         
         if( atWorldEdge() )
