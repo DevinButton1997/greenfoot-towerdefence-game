@@ -29,7 +29,7 @@ public class IceTower extends Tower
 {
     public IceTower()
     {
-        super(80, 300, 28, 2, PRICE_ICETOWER);
+        super(80, 300, 28, 2, PRICE_ICETOWER, true);
     }
     
     /**

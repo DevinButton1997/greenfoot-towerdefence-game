@@ -33,6 +33,7 @@ public class Tower extends UI
     protected double TOWER_DAMAGE; // The Damage that the Tower does to the creeps.
     protected int lastShot;        // Counts the calls of the act methode from the Tower untill it reacheas the value of REALOAD_SPEED.
     protected double BULLET_SPEED; // Bullet speed
+    protected boolean attackFirst; // If True the tower will always shoot at the Creep with the lowest id in range = the creep nearst to the exit of the map, else it will alway shoot at the creep with the highest id in range.
     
     protected int level = 1;       // Level from the tower, 1 is the initial level.
     protected int upgradeCosts;    // Upgradecosts to upgrade the tower to the next higher level.
@@ -49,7 +50,7 @@ public class Tower extends UI
      * @param bulletSpeed   Bulletspeed.
      * @param towerCosts    Ammout of Gold needed to build the tower.
      */
-    public Tower(double radius, double reloadSpeed, double damage, double bulletSpeed, int towerCosts)
+    public Tower(double radius, double reloadSpeed, double damage, double bulletSpeed, int towerCosts, boolean attackFirstCreep)
     {
         RADIUS        = radius;
         RELOAD_SPEED  = reloadSpeed;
@@ -57,6 +58,7 @@ public class Tower extends UI
         BULLET_SPEED  = bulletSpeed;
         upgradeCosts  = (int) (towerCosts * 1.75);
         lastShot      = (int) RELOAD_SPEED;
+        attackFirst   = attackFirstCreep;
     }
     
     /**
@@ -70,16 +72,33 @@ public class Tower extends UI
     
         if( objectsInRange.size() > 0 )
         {
-            int highestId = spawnedCreeps;
             int targetId = 0;
+            int targetCreepId;
             
-            // If the previous target is in the towers range it will be attacked again.
-            for( int i = 0; i < objectsInRange.size(); i++ )
+            if( attackFirst )
             {
-                if( ((Creep) objectsInRange.get(i)).id < highestId )
+                targetCreepId = MAX_CREEPS;
+                
+                for( int i = 0; i < objectsInRange.size(); i++ )
                 {
-                    highestId = ((Creep) objectsInRange.get(i)).id;
-                    targetId = i;
+                    if( ((Creep) objectsInRange.get(i)).id < targetCreepId )
+                    {
+                        targetCreepId = ((Creep) objectsInRange.get(i)).id;
+                        targetId      = i;
+                    }
+                }
+            }
+            else
+            {
+                targetCreepId = 0;
+                
+                for( int i = 0; i < objectsInRange.size(); i++ )
+                {
+                    if( ((Creep) objectsInRange.get(i)).id > targetCreepId )
+                    {
+                        targetCreepId = ((Creep) objectsInRange.get(i)).id;
+                        targetId = i;
+                    }
                 }
             }
             
@@ -178,10 +197,27 @@ public class Tower extends UI
      * 
      * @return   Tower level
      */
-    
     public int getLevel()
     {
         return level;
+    }
+    
+    /**
+     * Changes the towers priority on wich creep in his range he will open fire.
+     */
+    public void attackFirstCreep(boolean attackFirstCreep)
+    {
+        attackFirst = attackFirstCreep;
+    }
+    
+    /**
+     * Returns the towers target priority
+     * 
+     * @return   Target priority.
+     */
+    public boolean getTargetPriority()
+    {
+        return attackFirst;
     }
     
     /**

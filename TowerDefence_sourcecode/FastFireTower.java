@@ -32,7 +32,7 @@ public class FastFireTower extends Tower
     
     public FastFireTower()
     {
-        super(75, 55, 7, 4.0, PRICE_FASTFIRETOWER);
+        super(75, 55, 7, 4.0, PRICE_FASTFIRETOWER, true);
     }
     
     /**

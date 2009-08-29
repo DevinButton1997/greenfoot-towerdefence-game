@@ -64,6 +64,8 @@ public class Spawn extends UI
         {
             lastWave   = 0;
             roundEnded = true;
+            
+            increaseGold((int) ((MAX_CREEPS / 2) * goldAmmout)); // Let's give the player a small extra bonus for passing the last level ;) .
         }
         
         if( roundEnded )
@@ -79,7 +81,7 @@ public class Spawn extends UI
         
         if( (aliveCreeps <= 0)&&(roundEnded)&&(lastWave >= actsBetweenWaves) )
         {
-            if( !levelUp((int) (5*goldAmmout)) )
+            if( !playerLevelUp() )
                 return;
             
             healthPoints += (int) healthPoints*0.10;
