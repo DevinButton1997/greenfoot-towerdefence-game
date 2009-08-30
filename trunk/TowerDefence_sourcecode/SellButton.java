@@ -20,11 +20,55 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Sell Tower button. (Handeled in Controls.class)
+ * Sell Tower button.
  * 
  * @author (Kevin Huber) 
- * @version (1.1)
+ * @version (1.2)
  */
 public class SellButton extends Button
-{ 
+{
+    /**
+     * Check if the button is pressed and handel the result.
+     */
+    public void act() 
+    {
+        // Check if the mouse is over the button to do a mouse over effect
+        if( getWorld().getObjectsAt(mouseX, mouseY, SellButton.class).isEmpty() )
+        {
+            if( mouseOverEffectDisplayed )
+            {
+                setImage("button_sell.png");
+                mouseOverEffectDisplayed = false;
+            }
+            
+            return;
+        }
+        else // The mouse is visiting our button ;) .
+        {
+            if( !mouseOverEffectDisplayed )
+            {
+                setImage("button_sell_over.png");
+                mouseOverEffectDisplayed = true;
+            }
+            
+            if( Greenfoot.mouseClicked(this) )
+            {
+                onButtonPressed();
+            }
+        }
+    }
+    
+    public void onButtonPressed()
+    {
+        // The button is beeing pressed, now do something!
+        if( selectedTower != null )
+        {
+            increaseGold((int) Math.round((selectedTower.getUpgradeCosts()/2)*0.75));
+            
+            deselectTower();
+            
+            getWorld().removeObject(selectedTower.levelBar);
+            getWorld().removeObject(selectedTower);
+        }
+    }
 }

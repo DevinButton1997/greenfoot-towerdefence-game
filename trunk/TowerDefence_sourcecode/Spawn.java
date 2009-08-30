@@ -23,7 +23,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Spawns the Creeps and manage the levels.
  * 
  * @author (Kevin Huber) 
- * @version (1.2)
+ * @version (1.2.2)
  */
 public class Spawn extends UI
 {

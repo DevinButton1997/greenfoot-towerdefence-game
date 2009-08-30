@@ -31,7 +31,6 @@ public class myWorld extends World
     public static World_preview map1 = new World_preview();
     public static World2_preview map2 = new World2_preview();
     public static World3_preview map3 = new World3_preview();
-    public static MenuControl ms = new MenuControl();
 
     /**
      * Constructor for objects of class ChooseMap.
@@ -43,14 +42,13 @@ public class myWorld extends World
         
         setBackground("mainMenuBG.png");
         
-        setPaintOrder(Explosion.class, GameOverScreen.class, HealthBar.class, DamageReceived.class,
-                      Creep.class, LevelBar.class, NormalTower.class, Label.class, Counter.class, Bullet.class);
+        setPaintOrder(Explosion.class, GameOverScreen.class, Label.class, Counter.class, Button.class, Menu.class, LevelBar.class, Tower.class, Controls.class, HealthBar.class,
+                      DamageReceived.class, Creep.class, Bullet.class);
         setActOrder(Label.class, Creep.class, Tower.class, Bullet.class, Spawn.class, Controls.class);
         
         addObject(map1, 320, 165);
         addObject(map2, 565, 245);
         addObject(map3, 320, 390);
-        addObject(ms, 0, 0);
         
         //setLevel(3);
     }
@@ -58,17 +56,12 @@ public class myWorld extends World
     
     public void setLevel(int mapId)
     {
+        // Remove the main menu controls
         removeObject(map1);
         removeObject(map2);
         removeObject(map3);
-        removeObject(ms);
         
         UI ui = new UI();
-        
-        //Menu interface entfernen
-        removeObject(map1);
-        removeObject(map2);
-        removeObject(ms);
         
         switch(mapId)
         {
@@ -78,7 +71,8 @@ public class myWorld extends World
                 ui.reset();
         
                 // Create controls and spawns
-                addObject(new Controls(), 0, 0);
+                addObject(new MouseControl(), 0, 0);
+                addObject(new KeyboardControl(), 0, 0);
                 addObject(new Spawn(0), 0, 70);
                 addObject(ui, 0, 0);
                 

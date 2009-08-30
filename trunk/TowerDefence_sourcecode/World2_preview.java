@@ -20,11 +20,21 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class World2_preview here. (Handeled in Controls.class)
+ * Preview of Map 2 in the main menu, this class only checks if the preview is pressed or not and changes the level if it's pressed
  * 
  * @author (Kevin Huber) 
- * @version (1.1)
+ * @version (1.2)
  */
 public class World2_preview extends Button
-{  
+{
+    /**
+     * Check if the preview is pressed...
+     */
+    public void act() 
+    {
+        if( Greenfoot.mouseClicked(this) )
+        {
+            ((myWorld) getWorld()).setLevel(2);
+        }
+    }
 }

@@ -25,7 +25,7 @@ import java.awt.Color;
  * Label that Displays a String.
  * 
  * @author (Kevin Huber) 
- * @version (1.0)
+ * @version (1.1)
  */
 public class Label extends Actor
 {   

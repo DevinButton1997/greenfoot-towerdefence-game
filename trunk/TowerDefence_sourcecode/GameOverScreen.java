@@ -40,14 +40,17 @@ public class GameOverScreen extends Actor
         
         if(!won)
         {
+            String message = "Game over!";
             im.setColor(Color.RED);
-            im.drawString("Du hast verloren, probiere es erneut.", imWidth/2-295, imHeight/2);
+            im.drawString(message, imWidth / 2 - ((message.length() + 2) * 10), imHeight / 2);
         }
         else
         {
+            String message = "Victory!";
             im.setColor(Color.GREEN);
-            im.drawString("Herzlichen Glückwunsch, du hast gewonnen!", imWidth/2-355, imHeight/2);
+            im.drawString(message, imWidth / 2 - ((message.length() + 2) * 10), imHeight / 2);
         }
+        
         setImage(im);
     }
 }

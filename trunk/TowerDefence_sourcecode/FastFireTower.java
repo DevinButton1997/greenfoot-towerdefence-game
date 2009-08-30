@@ -23,7 +23,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Fast shooting Tower.
  * 
  * @author (Kevin Huber) 
- * @version (0.5)
+ * @version (0.6)
  */
 public class FastFireTower extends Tower
 {
