@@ -27,28 +27,29 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Spawn extends UI
 {
+    private static final int timeBetweenSpawns   = 1500;    // Time between spawns in ms.
+    private static final int timeBetweenWaves    = 10000;   // Time between waves in ms.
+    private static final double GOLD_MULTIPLER   = 0.30;    // Gold multipler ( Default: 0.30 )
+    private static final double HEALTH_MULTIPLER = 0.15;    // Health multipler ( Default: 0.15 )
+    
     private double healthPoints;               // Creep Healthpoints
     private double goldAmmout;                 // Bounty for killing one creep
-    private final int actsBetweenSpawns = 100; // Calls of act() between spawns.
-    private final int actsBetweenWaves = 500;  // Calls of act() between each wave.
-    
     private int spawnedCreepMoveDirection;
     
-    private int lastSpawn;
-    private int lastWave;
+    private long lastSpawn;
+    private long lastWave;
     private boolean roundEnded;
     
     public Spawn(int creepSpawnDirection)
     {
         setImage(new GreenfootImage(1, 1));
         
-        
         // Set default values
-        healthPoints  = 250;
+        healthPoints  = 180;
         goldAmmout    = 5;
         spawnedCreeps = MAX_CREEPS;
-        lastSpawn     = actsBetweenSpawns;
-        lastWave      = 0;
+        lastSpawn     = 0;
+        lastWave      = System.currentTimeMillis();
         roundEnded    = true;
         
         spawnedCreepMoveDirection = creepSpawnDirection;
@@ -62,7 +63,7 @@ public class Spawn extends UI
     {
         if( (aliveCreeps <= 0)&&(!roundEnded) )
         {
-            lastWave   = 0;
+            lastWave   = System.currentTimeMillis();
             roundEnded = true;
             
             increaseGold((int) ((MAX_CREEPS / 2) * goldAmmout)); // Let's give the player a small extra bonus for passing the last level ;) .
@@ -70,21 +71,19 @@ public class Spawn extends UI
         
         if( roundEnded )
         {
-            lastWave++;
-            
-            nextWaveLabel.setCaption(""+(actsBetweenWaves-lastWave));
+            nextWaveLabel.setCaption(""+( (timeBetweenWaves - (System.currentTimeMillis() - lastWave)) / 1000));
         }
         else
         {
             nextWaveLabel.setCaption("n.a");
         }
         
-        if( (aliveCreeps <= 0)&&(roundEnded)&&(lastWave >= actsBetweenWaves) )
+        if( (aliveCreeps <= 0)&&(roundEnded)&&(System.currentTimeMillis() >= (lastWave + timeBetweenWaves)) )
         {
             if( !playerLevelUp() )
                 return;
-            
-            healthPoints += (int) healthPoints*0.10;
+            // Increase creeps healtpoints
+            healthPoints += (int) healthPoints * HEALTH_MULTIPLER;
             
             if( soundOn )
                 Greenfoot.playSound("come_on.wav");
@@ -93,9 +92,9 @@ public class Spawn extends UI
             {
                 spawnedCreeps = MAX_CREEPS;
                 // Spawn boss
-                getWorld().addObject(new Creep(0, (int) healthPoints*5, (int) goldAmmout*6, spawnedCreepMoveDirection), getX(), getY());
-                // increase bounty for killing creeps on 30%
-                goldAmmout += goldAmmout*0.30;
+                getWorld().addObject(new Creep(0, (int) healthPoints * 5, (int) goldAmmout * 6, spawnedCreepMoveDirection), getX(), getY());
+                // increase bounty for killing creeps
+                goldAmmout += goldAmmout * GOLD_MULTIPLER;
                 
                 aliveCreeps = 1;
             }
@@ -105,20 +104,18 @@ public class Spawn extends UI
                 aliveCreeps   = MAX_CREEPS;
             }
             
-            lastWave   = actsBetweenSpawns;
             roundEnded = false;
         }
         
-        if( lastSpawn > actsBetweenSpawns )
+        if( System.currentTimeMillis() >= (lastSpawn + timeBetweenSpawns) )
         {
             if( spawnedCreeps < MAX_CREEPS )
             {
                 getWorld().addObject(new Creep(spawnedCreeps, (int) healthPoints, (int) goldAmmout, spawnedCreepMoveDirection), getX(), getY());
                 
                 spawnedCreeps++;
-                lastSpawn = 0;
+                lastSpawn = System.currentTimeMillis();
             }
         }
-        else lastSpawn++;
     }
 }

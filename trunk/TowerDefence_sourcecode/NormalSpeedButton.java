@@ -30,6 +30,6 @@ public class NormalSpeedButton extends Button
     public void onButtonPressed()
     {
         // The button is beeing pressed, now do something!
-        Greenfoot.setSpeed(65);
+        Greenfoot.setSpeed(50);
     }
 }
