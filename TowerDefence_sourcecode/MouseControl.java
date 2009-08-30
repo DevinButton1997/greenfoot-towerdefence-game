@@ -107,6 +107,7 @@ public class MouseControl extends Controls
                         
                         buildTowerTyp = TowerTyp.None;
                     }
+                    break;
                 case Ice:
                     if( getGold() >= PRICE_ICETOWER )
                     {
