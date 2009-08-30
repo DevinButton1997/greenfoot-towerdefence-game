@@ -190,7 +190,8 @@ public class myWorld extends World
                 ui.reset();
         
                 // Create controls and spawns
-                addObject(new Controls(), 0, 0);
+                addObject(new MouseControl(), 0, 0);
+                addObject(new KeyboardControl(), 0, 0);
                 addObject(new Spawn(0), 0, 80);
                 addObject(ui, 0, 0);
                 
@@ -307,7 +308,8 @@ public class myWorld extends World
                 ui.reset();
         
                 // Create controls and spawns
-                addObject(new Controls(), 0, 0);
+                addObject(new MouseControl(), 0, 0);
+                addObject(new KeyboardControl(), 0, 0);
                 addObject(new Spawn(90), 508, 0);
                 addObject(ui, 0, 0);
                 
