@@ -57,8 +57,8 @@ public class KeyboardControl  extends Controls
         {
             increaseGold((int) Math.round((selectedTower.getUpgradeCosts()/2)*0.75));
             
-            getWorld().removeObject(selectedTower);
             getWorld().removeObject(selectedTower.levelBar);
+            getWorld().removeObject(selectedTower);
             deselectTower();
             
             lastKeystroke = System.currentTimeMillis();

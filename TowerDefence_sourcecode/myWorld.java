@@ -147,12 +147,12 @@ public class myWorld extends World
                 addObject(ui.sellButton, 706, 540);
                 
                 // Create normal speed button
-                ui.normalSpeedButton = new NormalSpeedButton();
-                addObject(ui.normalSpeedButton, 10, 550);
+                //ui.normalSpeedButton = new NormalSpeedButton();
+                //addObject(ui.normalSpeedButton, 10, 550);
                 
                 // Create fast speed button
-                ui.fastSpeedButton = new FastSpeedButton();
-                addObject(ui.fastSpeedButton, 30, 550);
+                //ui.fastSpeedButton = new FastSpeedButton();
+                //addObject(ui.fastSpeedButton, 30, 550);
                 
                 // Create sound on/off button
                 ui.soundOnOffButton = new SoundOnOffButton();
@@ -266,12 +266,12 @@ public class myWorld extends World
                 addObject(ui.sellButton, 706, 540);
                 
                 // Create normal speed button
-                ui.normalSpeedButton = new NormalSpeedButton();
-                addObject(ui.normalSpeedButton, 10, 550);
+                //ui.normalSpeedButton = new NormalSpeedButton();
+                //addObject(ui.normalSpeedButton, 10, 550);
                 
                 // Create fast speed button
-                ui.fastSpeedButton = new FastSpeedButton();
-                addObject(ui.fastSpeedButton, 30, 550);
+                //ui.fastSpeedButton = new FastSpeedButton();
+                //addObject(ui.fastSpeedButton, 30, 550);
                 
                 // Create sound on/off button
                 ui.soundOnOffButton = new SoundOnOffButton();
@@ -384,12 +384,12 @@ public class myWorld extends World
                 addObject(ui.sellButton, 706, 540);
                 
                 // Create normal speed button
-                ui.normalSpeedButton = new NormalSpeedButton();
-                addObject(ui.normalSpeedButton, 10, 550);
+                //ui.normalSpeedButton = new NormalSpeedButton();
+                //addObject(ui.normalSpeedButton, 10, 550);
                 
                 // Create fast speed button
-                ui.fastSpeedButton = new FastSpeedButton();
-                addObject(ui.fastSpeedButton, 30, 550);
+                //ui.fastSpeedButton = new FastSpeedButton();
+                //addObject(ui.fastSpeedButton, 30, 550);
                 
                 // Create sound on/off button
                 ui.soundOnOffButton = new SoundOnOffButton();

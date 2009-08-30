@@ -65,10 +65,9 @@ public class SellButton extends Button
         {
             increaseGold((int) Math.round((selectedTower.getUpgradeCosts()/2)*0.75));
             
-            deselectTower();
-            
             getWorld().removeObject(selectedTower.levelBar);
             getWorld().removeObject(selectedTower);
+            deselectTower();
         }
     }
 }
