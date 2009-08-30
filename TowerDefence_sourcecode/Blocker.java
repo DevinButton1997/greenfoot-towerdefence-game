@@ -23,7 +23,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Blocks objects from class Tower.
  * 
  * @author (Kevin Huber) 
- * @version (1.1)
+ * @version (1.1.2)
  */
 public class Blocker extends Actor
 {

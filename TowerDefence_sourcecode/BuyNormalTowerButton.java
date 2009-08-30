@@ -20,11 +20,47 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Buy NormalTower button. (Handeled in Controls.class)
+ * Buy NormalTower button.
  * 
  * @author (Kevin Huber) 
- * @version (1.1)
+ * @version (1.2)
  */
 public class BuyNormalTowerButton extends Button
-{  
+{
+    /**
+     * Check if the button is pressed and handel the result.
+     */
+    public void act() 
+    {
+        // Check if the mouse is over the button to do a mouse over effect
+        if( getWorld().getObjectsAt(mouseX, mouseY, BuyNormalTowerButton.class).isEmpty() )
+        {
+            if( mouseOverEffectDisplayed )
+            {
+                setImage("buy_NormalTower.png");
+                mouseOverEffectDisplayed = false;
+            }
+            
+            return;
+        }
+        else // The mouse is visiting our button ;) .
+        {
+            if( !mouseOverEffectDisplayed )
+            {
+                setImage("buy_NormalTower_over.png");
+                mouseOverEffectDisplayed = true;
+            }
+            
+            if( Greenfoot.mouseClicked(this) )
+            {
+                onButtonPressed();
+            }
+        }
+    }
+    
+    public void onButtonPressed()
+    {
+        // The button is beeing pressed, now do something!
+        createNewTowerPreview(TowerTyp.Normal);
+    }
 }

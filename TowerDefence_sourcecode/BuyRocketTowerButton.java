@@ -20,11 +20,47 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Buy RocketTower button. (Handeled in Controls.class)
+ * Buy RocketTower button.
  * 
  * @author (Kevin Huber) 
  * @version (1.1)
  */
 public class BuyRocketTowerButton extends Button
-{ 
+{
+    /**
+     * Check if the button is pressed and handel the result.
+     */
+    public void act() 
+    {
+        // Check if the mouse is over the button to do a mouse over effect
+        if( getWorld().getObjectsAt(mouseX, mouseY, BuyRocketTowerButton.class).isEmpty() )
+        {
+            if( mouseOverEffectDisplayed )
+            {
+                setImage("buy_RocketTower.png");
+                mouseOverEffectDisplayed = false;
+            }
+            
+            return;
+        }
+        else // The mouse is visiting our button ;) .
+        {
+            if( !mouseOverEffectDisplayed )
+            {
+                setImage("buy_RocketTower_over.png");
+                mouseOverEffectDisplayed = true;
+            }
+            
+            if( Greenfoot.mouseClicked(this) )
+            {
+                onButtonPressed();
+            }
+        }
+    }
+    
+    public void onButtonPressed()
+    {
+        // The button is beeing pressed, now do something!
+        createNewTowerPreview(TowerTyp.Rocket);
+    }
 }

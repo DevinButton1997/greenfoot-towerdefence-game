@@ -24,7 +24,7 @@ import java.util.List; // List
  * Basic methods and Variables needed by the tower.
  * 
  * @author (Kevin Huber) 
- * @version (1.1)
+ * @version (1.2)
  */
 public class Tower extends UI
 {

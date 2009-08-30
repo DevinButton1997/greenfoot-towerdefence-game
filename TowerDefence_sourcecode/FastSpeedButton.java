@@ -20,11 +20,16 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class FastSpeedButton here. (Handeled in Controls.class)
+ * Write a description of class FastSpeedButton here.
  * 
  * @author (Kevin Huber) 
- * @version (1.1)
+ * @version (1.2)
  */
 public class FastSpeedButton extends Button
-{  
+{
+    public void onButtonPressed()
+    {
+        // The button is beeing pressed, now do something!
+        Greenfoot.setSpeed(65);
+    }
 }

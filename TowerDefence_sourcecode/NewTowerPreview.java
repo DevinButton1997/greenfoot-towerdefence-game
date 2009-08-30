@@ -20,21 +20,28 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Preview of Map 3 in the main menu, this class only checks if the preview is pressed or not and changes the level if it's pressed
+ * Displays a preview image of the new tower at the cursors position.
  * 
  * @author (Kevin Huber) 
- * @version (1.2)
+ * @version (1.0)
  */
-public class World3_preview extends Button
+public class NewTowerPreview extends Actor
 {
+    public NewTowerPreview(String imageFile)
+    {
+        setImage(imageFile);
+    }
     /**
-     * Check if the preview is pressed...
+     * Act - do whatever the NewTowerPreview wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        if( Greenfoot.mouseClicked(this) )
-        {
-            ((myWorld) getWorld()).setLevel(3);
-        }
-    }
+        MouseInfo mouseInfo = Greenfoot.getMouseInfo();
+        
+        if( mouseInfo == null )
+            return;
+        
+        setLocation(mouseInfo.getX(), mouseInfo.getY());
+    }    
 }

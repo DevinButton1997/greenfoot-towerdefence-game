@@ -23,7 +23,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Normal tower.
  * 
  * @author (Kevin Huber) 
- * @version (0.5)
+ * @version (0.6)
  */
 public class NormalTower extends Tower
 {

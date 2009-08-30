@@ -24,7 +24,7 @@ import java.awt.Color;
  * Write a description of class FPSLabel2 here.
  * 
  * @author (Kevin Huber) 
- * @version (1.1)
+ * @version (1.1.2)
  */
 public class FPSLabel extends Label
 {

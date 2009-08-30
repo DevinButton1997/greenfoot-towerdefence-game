@@ -20,11 +20,53 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Upgrade Tower button. (Handeled in Controls.class)
+ * Upgrade Tower button.
  * 
  * @author (Kevin Huber) 
- * @version (1.1)
+ * @version (1.2)
  */
 public class UpgradeButton extends Button
 {
+    /**
+     * Check if the button is pressed and handel the result.
+     */
+    public void act() 
+    {
+        // Check if the mouse is over the button to do a mouse over effect
+        if( getWorld().getObjectsAt(mouseX, mouseY, UpgradeButton.class).isEmpty() )
+        {
+            if( mouseOverEffectDisplayed )
+            {
+                upgradeButton.setImage("button_Upgrade.png");
+                mouseOverEffectDisplayed = false;
+            }
+            
+            return;
+        }
+        else // The mouse is visiting our button ;) .
+        {
+            if( !mouseOverEffectDisplayed )
+            {
+                upgradeButton.setImage("button_Upgrade_over.png");
+                mouseOverEffectDisplayed = true;
+            }
+            
+            if( Greenfoot.mouseClicked(this) )
+            {
+                onButtonPressed();
+            }
+        }
+    }
+    
+    public void onButtonPressed()
+    {
+        // The button is beeing pressed, now do something!
+        if( (selectedTower != null)&&(getGold() >= selectedTower.getUpgradeCosts()) )
+        {
+            decreaseGold(selectedTower.getUpgradeCosts());
+            
+            selectedTower.levelUp();
+            updateTowerDetails();
+        }
+    }
 }

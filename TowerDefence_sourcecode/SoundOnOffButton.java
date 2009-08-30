@@ -20,11 +20,25 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Turn Sound on/off (Handeled in Controls.class)
+ * Turn Sound on/off.
  * 
  * @author (Kevin Huber) 
- * @version (1.1)
+ * @version (1.2)
  */
 public class SoundOnOffButton extends Button
-{   
+{
+    public void onButtonPressed()
+    {
+        // The button is beeing pressed, now do something!
+        if( soundOn )
+        {
+            setImage("button_sound_off.png");
+            soundOn = false;
+        }
+        else
+        {
+            setImage("button_sound_on.png");
+            soundOn = true;
+        }
+    }
 }

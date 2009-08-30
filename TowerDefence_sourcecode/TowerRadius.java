@@ -18,23 +18,25 @@
  **/
  
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.awt.Color;
 
 /**
- * Preview of Map 3 in the main menu, this class only checks if the preview is pressed or not and changes the level if it's pressed
+ * Displays the radius of a tower.
  * 
  * @author (Kevin Huber) 
- * @version (1.2)
+ * @version (1.0)
  */
-public class World3_preview extends Button
+public class TowerRadius extends Actor
 {
-    /**
-     * Check if the preview is pressed...
-     */
-    public void act() 
+    public TowerRadius(Tower tower)
     {
-        if( Greenfoot.mouseClicked(this) )
-        {
-            ((myWorld) getWorld()).setLevel(3);
-        }
+        GreenfootImage im = new GreenfootImage((int) (tower.getRadius()*1.8), (int) (tower.getRadius()*1.8));
+        setImage(im);
+        
+        // Fill the circle
+        im.setColor(new Color (46, 46, 46, 180));
+        im.fillOval(0, 0, (int) (tower.getRadius()*1.8), (int) (tower.getRadius()*1.8));
+        
+        setImage(im);
     }
 }

@@ -20,11 +20,35 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Just to make code clear.
+ * Simple button class
  * 
  * @author (Kevin Huber) 
  * @version (1.1)
  */
-public class Button extends Menu
-{  
+public class Button extends Controls
+{
+    protected boolean mouseOverEffectDisplayed = false;  // True if mouseover picture is displayed
+    
+    /**
+     * Check if the button is pressed and handel the result.
+     */
+    public void act() 
+    {
+        if( Greenfoot.mouseClicked(this) )
+        {
+            onButtonPressed();
+        }
+    }
+    
+    /**
+     * Called if the mouse is over the button
+     */
+    
+    /**
+     * Called if the button is pressed.
+     */
+    public void onButtonPressed()
+    {
+        // The button is beeing pressed, now do something!
+    }
 }

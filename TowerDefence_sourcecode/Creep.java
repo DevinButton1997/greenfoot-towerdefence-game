@@ -23,7 +23,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Creeps.
  * 
  * @author (Kevin Huber) 
- * @version (1.4)
+ * @version (1.4.2)
  */
 public class Creep extends UI
 {

@@ -26,5 +26,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (1.1)
  */
 public class NormalSpeedButton extends Button
-{  
+{
+    public void onButtonPressed()
+    {
+        // The button is beeing pressed, now do something!
+        Greenfoot.setSpeed(65);
+    }
 }
